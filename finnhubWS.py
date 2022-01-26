@@ -184,7 +184,7 @@ class finnhubWS():
 
     def _on_error(self, ws, error):
         self.logger.error(error)
-        self.on_error(self, error)
+        self.on_error(error)
 
     def _on_close(self, ws, status, message):
         self.logger.info(f'Websocket closed with status {status}: {message}')
