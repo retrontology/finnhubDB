@@ -23,6 +23,13 @@ class finnhubWS():
     def __del__(self):
         self.close()
 
+    def _open_loop(self):
+        while True:
+            try:
+                self._ws.run_forever()
+            except Exception as e:
+                self.logger.error(e)
+
     def open(self):
         if not self._open:
             websocket.enableTrace(self._trace)
@@ -33,7 +40,7 @@ class finnhubWS():
                 on_close = self._on_close
                 )
             self._ws.on_open = self._on_open
-            self._ws_thread = Thread(target=self._ws.run_forever)
+            self._ws_thread = Thread(target=self._open_loop)
             self._ws_thread.start()
             while not self._open: time.sleep(0.01)
         else:
