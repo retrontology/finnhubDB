@@ -19,7 +19,10 @@ class finnhubWS():
         self.open()
     
     def __del__(self):
-        self.close()
+        try:
+            self.close()
+        except:
+            pass
 
     def _open_loop(self):
         while True:
