@@ -43,12 +43,6 @@ class finnhubWS():
             self._ws_thread = Thread(target=self._open_loop)
             self._ws_thread.start()
             while not self._open: time.sleep(0.01)
-            if self._subscriptions:
-                for subscription in self._subscriptions:
-                    self.subscribe(subscription)
-            if self._subscriptions_news:
-                for subscription in self._subscriptions_news:
-                    self.subscribe_news(subscription)
         else:
             raise SocketAlreadyOpen
     
@@ -207,6 +201,12 @@ class finnhubWS():
     def _on_open(self, ws):
         self.logger.info("Websocket opened")
         self._open = True
+        if self._subscriptions:
+            for subscription in self._subscriptions:
+                self.subscribe(subscription)
+        if self._subscriptions_news:
+            for subscription in self._subscriptions_news:
+                self.subscribe_news(subscription)
         self.on_open()
 
 
