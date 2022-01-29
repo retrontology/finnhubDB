@@ -32,13 +32,18 @@ def setup_logger(debug=False):
     stream_formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(name)s: %(message)s')
     stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(stream_formatter)
+    file_handler = logging.FileHandler('finnhubDB.log')
+    file_handler.setFormatter(stream_formatter)
     if debug:
         logger.setLevel(logging.DEBUG)
         stream_handler.setLevel(logging.DEBUG)
+        file_handler.setLevel(logging.DEBUG)
     else:
         logger.setLevel(logging.INFO)
         stream_handler.setLevel(logging.INFO)
+        file_handler.setLevel(logging.INFO)
     logger.addHandler(stream_handler)
+    logger.addHandler(file_handler)
     return logger
 
 if __name__ == '__main__':
