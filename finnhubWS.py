@@ -2,7 +2,6 @@ import websocket
 from threading import Thread
 import json
 import logging
-import finnhub
 import time
 
 class finnhubWS():
@@ -17,7 +16,6 @@ class finnhubWS():
         self._subscriptions_news = set()
         self._ws_thread = None
         self._open = False
-        self.client = finnhub.Client(api_key=self.token)
         self.open()
     
     def __del__(self):
