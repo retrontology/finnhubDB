@@ -203,10 +203,14 @@ class finnhubWS():
         self.logger.info("Websocket opened")
         self._open = True
         if self._subscriptions:
-            for subscription in self._subscriptions:
+            subscriptions = self._subscriptions.copy()
+            self._subscriptions = set()
+            for subscription in subscriptions:
                 self.subscribe(subscription)
         if self._subscriptions_news:
-            for subscription in self._subscriptions_news:
+            subscriptions = self._subscriptions_news.copy()
+            self._subscriptions_news = set()
+            for subscription in subscriptions:
                 self.subscribe_news(subscription)
         self.on_open()
 
