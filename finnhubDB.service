@@ -1,0 +1,15 @@
+[Unit]
+Description=Finnhub websocket feeding an Influx DB
+
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=retrontology
+Group=retrontology
+
+WorkingDirectory=/home/retrontology/git/finnhubDB/
+ExecStart=/usr/bin/python3.10 run.py
+
+[Install]
+WantedBy=multi-user.target
